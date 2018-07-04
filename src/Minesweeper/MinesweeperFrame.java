@@ -70,45 +70,44 @@ public class MinesweeperFrame extends JFrame {
 
 				Graphics g = boardPanel.getGraphics();
 				Util.drawLine(g, size, width, newMap);
+				
+
+				for (int i = 0; i < size; i++) {
+					for (int j = 0; j < size; j++) {
+						System.out.print(map[i][j] + "\t");
+					}
+					System.out.println();
+				}
 			}
 		});
-/*
+
 		boardPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent mouseEvent) {
 				if (gameState) {
-					int mouseX = mouseEvent.getX() / 30;
-					int mouseY = mouseEvent.getY() / 30;
-
+					int mouseX = (mouseEvent.getX() - 40) / width;
+					int mouseY = (mouseEvent.getY() - 20) / width;
 					Graphics g = boardPanel.getGraphics();
-					clickCount++;
-					boolean check = Util.drawGobang(g, mouseX, mouseY, clickCount, data); // 有重複下點的可能
-					if (!check) {
-						clickCount--;
-					}
-
-					boolean ch1 = Util.checkHorizontalWin(data, mouseX - 1, mouseY); // 左右連線檢查
-					boolean ch2 = Util.checkVerticalWin(data, mouseX - 1, mouseY);// 上下連線檢查
-					boolean ch3 = Util.checkTopLeftToBottomRight(data, mouseX - 1, mouseY);// 左上到右下連線檢查
-					boolean ch4 = Util.checkTopRightToBottomLeft(data, mouseX - 1, mouseY);// 由上到左下連線檢查
-					if (ch1 || ch2 || ch3 || ch4) {
-						if (data[mouseX - 1][mouseY] == 1)
-							JOptionPane.showMessageDialog(null, "黑方獲勝", "", JOptionPane.INFORMATION_MESSAGE);
-						else
-							JOptionPane.showMessageDialog(null, "白方獲勝", "", JOptionPane.INFORMATION_MESSAGE);
-
-						Util.restartGame(g);// 初始化
-						clickCount = 0;
-						data = new int[17][17];
-						gameState = false;
-						restartBtn.setEnabled(false);
-						startBtn.setEnabled(true);
-						return;
-					}
+					Util.drawAnswer(g, mouseX, mouseY, size, map);
+					/*
+					 * if (!check) { clickCount--; }
+					 * 
+					 * boolean ch1 = Util.checkHorizontalWin(data, mouseX - 1, mouseY); // 左右連線檢查
+					 * boolean ch2 = Util.checkVerticalWin(data, mouseX - 1, mouseY);// 上下連線檢查
+					 * boolean ch3 = Util.checkTopLeftToBottomRight(data, mouseX - 1, mouseY);//
+					 * 左上到右下連線檢查 boolean ch4 = Util.checkTopRightToBottomLeft(data, mouseX - 1,
+					 * mouseY);// 由上到左下連線檢查 if (ch1 || ch2 || ch3 || ch4) { if (data[mouseX -
+					 * 1][mouseY] == 1) JOptionPane.showMessageDialog(null, "黑方獲勝", "",
+					 * JOptionPane.INFORMATION_MESSAGE); else JOptionPane.showMessageDialog(null,
+					 * "白方獲勝", "", JOptionPane.INFORMATION_MESSAGE);
+					 * 
+					 * Util.restartGame(g);// 初始化 clickCount = 0; data = new int[17][17]; gameState
+					 * = false; restartBtn.setEnabled(false); startBtn.setEnabled(true); return; }
+					 */
 				}
 			}
 		});
-*/
+
 /*
 		restartBtn.addActionListener(new ActionListener() {
 			@Override
