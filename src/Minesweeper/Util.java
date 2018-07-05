@@ -68,11 +68,8 @@ public class Util {
 		int width = 500 / size;
 
 		if (checkPixelBound(x, y, size) && map[y][x] == null) {
-			g.setColor(Color.GREEN);
-			// draw circle
-			g.drawOval(x * width + 40, y * width + 20, width, width);
-			g.drawOval(x * width + 41, y * width + 21, width - 2, width - 2);
-			g.drawOval(x * width + 42, y * width + 22, width - 4, width - 4);
+			g.setColor(new Color(0,0,255,100)); //畫RGBA
+			g.fillRect(x * width + 43, y * width + 23, width-3, width-3);
 		} else if (checkPixelBound(x, y, size) && map[y][x].equals("*")) {
 			drawAllAns(g, size, map);
 			JOptionPane.showMessageDialog(null, "Nice try", "QQ", JOptionPane.ERROR_MESSAGE);
@@ -86,21 +83,11 @@ public class Util {
 		for (int x = 0; x < size ; x++) {
 			for (int y = 0; y < size ; y++) {
 				if (map[y][x] == null) {
-					g.setColor(Color.GREEN);
-					// draw circle
-					g.drawOval(x * width + 40, y * width + 20, width, width);
-					g.drawOval(x * width + 41, y * width + 21, width - 2, width - 2);
-					g.drawOval(x * width + 42, y * width + 22, width - 4, width - 4);
-				} else {
-					g.setColor(Color.RED);
-					// draw "\"
-					g.drawLine(x * width + 39, y * width + 20, x * width + width + 39, y * width + width + 20);
-					g.drawLine(x * width + 40, y * width + 20, x * width + width + 40, y * width + width + 20);
-					g.drawLine(x * width + 41, y * width + 20, x * width + width + 41, y * width + width + 20);
-					// draw "/"
-					g.drawLine(x * width + 39, y * width + width + 20, x * width + width + 39, y * width + 20);
-					g.drawLine(x * width + 40, y * width + width + 20, x * width + width + 40, y * width + 20);
-					g.drawLine(x * width + 41, y * width + width + 20, x * width + width + 41, y * width + 20);
+					g.setColor(new Color(0,255,0,100)); //安全地畫綠色
+					g.fillRect(x * width + 43, y * width + 23, width-3, width-3);
+				} else { //炸彈畫紅色
+					g.setColor(new Color(255,0,0,100));
+					g.fillRect(x * width + 43, y * width + 23, width-3, width-3);
 				}
 			}
 		}

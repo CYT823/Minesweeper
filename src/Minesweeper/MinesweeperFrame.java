@@ -91,14 +91,18 @@ public class MinesweeperFrame extends JFrame {
 			@Override
 			public void mouseReleased(MouseEvent mouseEvent) {
 				if (gameState) {
-					int mouseX = (mouseEvent.getX() - 40) / width;
-					int mouseY = (mouseEvent.getY() - 20) / width;
-					
-					Graphics g = boardPanel.getGraphics();
-					Util.drawAnswer(g, mouseX, mouseY, size, map);
-					
-					clickMap[mouseY][mouseX] = null;
-					
+					if (mouseEvent.getX() >= 40 && mouseEvent.getY() >= 20) { //滑鼠點選座標x小於40 或y小於20就不處理
+						int mouseX = (mouseEvent.getX() - 40) / width;
+						int mouseY = (mouseEvent.getY() - 20) / width;
+
+						Graphics g = boardPanel.getGraphics();
+						Util.drawAnswer(g, mouseX, mouseY, size, map);
+
+						if (mouseX < size && mouseY < size) { //當滑鼠點選超過框框 則不放進陣列
+							clickMap[mouseY][mouseX] = null;
+						}
+					}
+
 					Util.checkGame(map, clickMap, size);
 				}
 			}
