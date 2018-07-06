@@ -26,11 +26,11 @@ public class MinesweeperFrame extends JFrame {
 	String[][] numMap; // 數字圖
 	String[][] clickMap; // 做記號的圖 最後要跟炸彈圖比對 決定輸贏
 	int max; // map邊界
-	
+
 	MinesweeperFrame() {
 		size = Util.givingSize();
-		width = 500 / size; 
-		
+		width = 500 / size;
+
 		controlPanel = new JPanel();
 		startBtn = new JButton("START");
 		restartBtn = new JButton("RESTART");
@@ -53,8 +53,8 @@ public class MinesweeperFrame extends JFrame {
 		numMap = new String[size][size];
 		clickMap = new String[size][size];
 		max = size - 1;
-		
-		map = Util.bombSetting(); //set bomb
+
+		map = Util.bombSetting(); // set bomb
 
 		startBtn.addActionListener(new ActionListener() {
 			@Override
@@ -62,13 +62,13 @@ public class MinesweeperFrame extends JFrame {
 				restartBtn.setEnabled(true);
 				startBtn.setEnabled(false);
 				gameState = true;
-				
+
 				for (int i = 0; i < size; i++) { // initial the click map with "*"
 					for (int j = 0; j < size; j++) {
 						clickMap[i][j] = "*";
 					}
 				}
-				
+
 				for (int i = 0; i < size; i++) { // make the number map
 					for (int j = 0; j < size; j++) {
 						numMap[i][j] = Util.search(map, i, j, max) + "";
@@ -91,14 +91,15 @@ public class MinesweeperFrame extends JFrame {
 			@Override
 			public void mouseReleased(MouseEvent mouseEvent) {
 				if (gameState) {
-					if (mouseEvent.getX() >= 40 && mouseEvent.getY() >= 20) { //滑鼠點選座標x小於40 或y小於20就不處理
+					if (mouseEvent.getX() >= 40 && mouseEvent.getY() >= 20) { // 滑鼠點選座標x小於40 或y小於20就不處理
 						int mouseX = (mouseEvent.getX() - 40) / width;
 						int mouseY = (mouseEvent.getY() - 20) / width;
 
-						Graphics g = boardPanel.getGraphics();
-						Util.drawAnswer(g, mouseX, mouseY, size, map);
-
-						if (mouseX < size && mouseY < size) { //當滑鼠點選超過框框 則不放進陣列
+						if (mouseX < size && mouseY < size) { // 當滑鼠點選超過框框 則不放進陣列
+							if (clickMap[mouseY][mouseX] != null) { // only draw when it hasn't been clicked
+								Graphics g = boardPanel.getGraphics();
+								gameState = Util.drawAnswer(g, mouseX, mouseY, size, map);
+							}
 							clickMap[mouseY][mouseX] = null;
 						}
 					}
@@ -126,7 +127,7 @@ public class MinesweeperFrame extends JFrame {
 				map = Util.bombSetting();
 			}
 		});
-		
+
 		QABtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

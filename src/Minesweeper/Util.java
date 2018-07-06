@@ -64,50 +64,52 @@ public class Util {
 		return true;
 	}
 
-	final static void drawAnswer(Graphics g, int x, int y, int size, String[][] map) { // draw answer
+	final static boolean drawAnswer(Graphics g, int x, int y, int size, String[][] map) { // draw answer
 		int width = 500 / size;
 
 		if (checkPixelBound(x, y, size) && map[y][x] == null) {
-			g.setColor(new Color(0,0,255,100)); //畫RGBA
-			g.fillRect(x * width + 43, y * width + 23, width-3, width-3);
+			g.setColor(new Color(0, 0, 255, 100)); // 畫RGBA
+			g.fillRect(x * width + 43, y * width + 23, width - 3, width - 3);
+			return true;
 		} else if (checkPixelBound(x, y, size) && map[y][x].equals("*")) {
 			drawAllAns(g, size, map);
 			JOptionPane.showMessageDialog(null, "Nice try", "QQ", JOptionPane.ERROR_MESSAGE);
+			return false;
 		} else {
-
+			return true;
 		}
 	}
 
-	final static void drawAllAns(Graphics g, int size, String[][] map) { //錯了顯示所有答案
+	final static void drawAllAns(Graphics g, int size, String[][] map) { // 錯了顯示所有答案
 		int width = 500 / size;
-		for (int x = 0; x < size ; x++) {
-			for (int y = 0; y < size ; y++) {
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
 				if (map[y][x] == null) {
-					g.setColor(new Color(0,255,0,100)); //安全地畫綠色
-					g.fillRect(x * width + 43, y * width + 23, width-3, width-3);
-				} else { //炸彈畫紅色
-					g.setColor(new Color(255,0,0,100));
-					g.fillRect(x * width + 43, y * width + 23, width-3, width-3);
+					g.setColor(new Color(0, 255, 0, 100)); // 安全地畫綠色
+					g.fillRect(x * width + 43, y * width + 23, width - 3, width - 3);
+				} else { // 炸彈畫紅色
+					g.setColor(new Color(255, 0, 0, 100));
+					g.fillRect(x * width + 43, y * width + 23, width - 3, width - 3);
 				}
 			}
 		}
 	}
-	
-	final static void checkGame(String[][] map, String[][] clickMap, int size) { //看遊戲結束了沒
+
+	final static void checkGame(String[][] map, String[][] clickMap, int size) { // 看遊戲結束了沒
 		boolean flag = true;
-		for (int i = 0; i < size; i++) { 
+		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				if(map[i][j] != clickMap[i][j]) {
+				if (map[i][j] != clickMap[i][j]) {
 					flag = false;
 					break;
 				}
 			}
 		}
-		if(flag == true) {
+		if (flag == true) {
 			JOptionPane.showMessageDialog(null, "Congratulation!!!", "~YA~", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-	
+
 	static int size;
 
 	final static int givingSize() { // 給格子個數
