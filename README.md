@@ -1,7 +1,5 @@
 # Minesweeper
 
-Ssimilar with minesweeper game
-
 Language: JAVA GUI
 
 Tools: eclipse
@@ -32,5 +30,6 @@ At the moment you click the bomb, game is over.
 
 Caution bomb and good luck!
 
+<img src="https://github.com/CYT823/Minesweeper/blob/master/images/minesweeper.png" width="400"/>
 
 Inspired by an app: https://reurl.cc/LdZ7e
